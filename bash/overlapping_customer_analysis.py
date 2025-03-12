@@ -13,7 +13,7 @@ def possible_combinations():
     
 def read_file(file_path):
     with open(file_path, 'r') as file:
-        return set(file.read().readsplit())) 
+        return set(file.read().splitlines())
 
 
 # def obtain_entity_names():
@@ -34,9 +34,9 @@ def handle_nested(combs):
     update_data_structure(str(i),len(i),intersection_result)    
     return intersection_result     
 
-def create_data_structure():
+# def create_data_structure():
     # Create the pandas DataFrame
-    df = pd.DataFrame(columns=['Entities','Quantity','Intersections'])
+    # df = pd.DataFrame(columns=['Entities','Quantity','Intersections'])
 
 
 def update_data_structure(file_names,quantity,intersections):
@@ -48,6 +48,7 @@ def update_data_structure(file_names,quantity,intersections):
 
 
 
-create_data_structure()
+# create_data_structure()
+df = pd.DataFrame(columns=['Entities','Quantity','Intersections'])
 possible_combinations()     
-print()  
+print(df)  
