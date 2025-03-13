@@ -1,54 +1,70 @@
+# This script calculates the count of common elements across a specified number of files (N),
+# considering all possible combinations of files ranging from 1 to N.
+
+# Usage: python3 ./overlapping_customer_analysis_name.py
+# PS: the file names are configured manually in the function possible_combinations()
+
 from itertools import combinations
 import pandas as pd
 
+# Function to create the all possible combinations of the files
 def possible_combinations():
-    for i in range(2,3):
-        # bvn file names of each entity
-        items = ["entity1.txt", "entity2.txt","entity3.txt", "entity4.txt","entity5.txt"]
+    for i in range(1,6):
+        
+        # input files names into the items[] arrat
+        # items = ["entity1".txt", "entity2.txt","entity3.txt", "entity4.txt","entity5.txt"]
+        items = ["output_file.txt", "output_file2.txt"]
         combs = list(combinations(items,i))  
-        print(combs)  # [('A', 'B', 'C'), ('A', 'B', 'D'), ('A', 'C', 'D'), ('B', 'C', 'D')]
-        print(str(len(combs))+ " combibations")  # 4
+        print(combs)  # [('A', 'B', 'C'), ('A','D'), ('A', 'C', 'D', B')]
+        print(str(len(combs))+ " combibations created") 
+
     return handle_nested(combs)
     
-    
+# Function to read files  
 def read_file(file_path):
     with open(file_path, 'r') as file:
+        # return set(file.read().split(','))
         return set(file.read().splitlines())
 
-
-# def obtain_entity_names():
-
+# Function to manage the analysis of file combinations grouped in the nested data structure from the possible_combinations() method
 def handle_nested(combs):
     for i in combs:
-        print(str(i))
+        # To test output
+        # print(str(i))
         for x,file in enumerate(i):
             if x==0:
                 intersection_result = read_file(file)
-                print(intersection_result)
+                # To test output
+                # print(intersection_result)
             else:
                 content = read_file(file)
-                print(content)
+                # To test output
+                # print(content)
+
                 intersection_result = intersection_result.intersection(content)
-                print(len(intersection_result))
-    print(intersection_result)
-    update_data_structure(str(i),len(i),intersection_result)    
+                # To test output
+                # print(intersection_result)
+
+        update_data_structure(str(i),len(i),len(intersection_result))   
+    # To test output 
+    # print(intersection_result)
+      
     return intersection_result     
 
-# def create_data_structure():
-    # Create the pandas DataFrame
-    # df = pd.DataFrame(columns=['Entities','Quantity','Intersections'])
-
-
+# function to store the results of the intersection analysis
 def update_data_structure(file_names,quantity,intersections):
 #     files_names = str(*file_names)e
 #     quantity = quantity
 #     intersections = intersections
     df.loc[len(df)] = [file_names,quantity,intersections]
 
+# main function
+def main():
+    df = pd.DataFrame(columns=['Entities','Quantity','Intersections'])
+    possible_combinations()     
+    print(df) 
+    df.to_csv('Overlapping_Analysis.csv', index = True) 
 
-
-
-# create_data_structure()
-df = pd.DataFrame(columns=['Entities','Quantity','Intersections'])
-possible_combinations()     
-print(df)  
+# initiate program
+if __name__ == "__main__":
+    main()
