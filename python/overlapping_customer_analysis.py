@@ -9,9 +9,9 @@ import pandas as pd
 
 # Function to create the all possible combinations of the files
 def possible_combinations():
-    for i in range(1,6):
+    for i in range(1,3):
         
-        # input files names into the items[] arrat
+        # input files names into the items[] array
         # items = ["entity1".txt", "entity2.txt","entity3.txt", "entity4.txt","entity5.txt"]
         items = ["output_file.txt", "output_file2.txt"]
         combs = list(combinations(items,i))  
@@ -60,11 +60,12 @@ def update_data_structure(file_names,quantity,intersections):
 
 # main function
 def main():
-    df = pd.DataFrame(columns=['Entities','Quantity','Intersections'])
+
     possible_combinations()     
     print(df) 
     df.to_csv('Overlapping_Analysis.csv', index = True) 
 
 # initiate program
 if __name__ == "__main__":
+    df = pd.DataFrame(columns=['Entities','Quantity','Intersections'])
     main()
