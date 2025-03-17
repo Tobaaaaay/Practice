@@ -9,7 +9,7 @@ import pandas as pd
 
 # Function to create the all possible combinations of the files
 def possible_combinations():
-    for i in range(1,3):
+    for i in range(1,6):
         
         # input files names into the items[] array
         # items = ["entity1".txt", "entity2.txt","entity3.txt", "entity4.txt","entity5.txt"]
